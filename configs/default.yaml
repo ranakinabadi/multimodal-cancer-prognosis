@@ -1,0 +1,37 @@
+
+#  default configuration — multimodal prognosis
+
+
+data:
+  tensor_dir   : "data/tensors/"
+  labels_csv   : "data/NSCLC-Radiomics-Lung1.csv"
+  target_size  : [64, 64, 64]
+  hu_min       : -1000
+  hu_max       : 400
+  train_frac   : 0.70
+  val_frac     : 0.15
+  test_frac    : 0.15
+  random_seed  : 42
+
+model:
+  feat_dim     : 64          # shared embedding dimension d
+  tabular_dim  : 3           # number of clinical features
+  dropout      : 0.3
+
+training:
+  epochs       : 50
+  batch_size   : 16
+  lr           : 0.001
+  weight_decay : 0.0001
+  lr_patience  : 5           # ReduceLROnPlateau patience
+  lr_factor    : 0.5
+  grad_clip    : 1.0
+
+evaluation:
+  n_cal_bins   : 5           # calibration plot bins
+  shap_nsamples: 100
+  shap_background: 50        # number of background samples for SHAP
+
+paths:
+  checkpoints  : "results/checkpoints/"
+  figures      : "results/figures/"
